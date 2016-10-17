@@ -1,4 +1,4 @@
-Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/lib/**/*.rb'].each {|file| require file }
 
 # q = Reader.new('/home/unkmas/kontur-test/data/pollens.csv', '/home/unkmas/kontur-test/data/harvest.csv')
 # bee_stats = q.read
@@ -15,7 +15,23 @@ class Winnie
     @bee_stats = reader.read
   end
 
-  # Public: prepares values for render
+  # Public: outputs stats in specified format
+  #
+  # format - a Symbol, format. One of: [:plain]. (default: :plain)
+  #
+  # Returns nothing.
+  # Raises ArgumentError if unsupported format given
+  def output(format = :plain)
+    case format
+    when :plain
+      Formatter::PlainText.format(values)
+    else
+      raise ArgumentError.new('There is no such format!')
+    end
+  end
+
+  private
+  # Internal: prepares values for render
   #
   # Returns hash of such values
   def values
@@ -29,17 +45,5 @@ class Winnie
       best_bee: bee_stats.get_stats(:bee).max(&bee_proc).key,
       worst_bee: bee_stats.get_stats(:bee).min(&bee_proc).key
     }
-  end
-
-  def plain_text
-    stats = values
-    puts <<-TEXT
-      Больше всего сахара было получено из пыльцы: #{stats[:best_sugar_pollen]}
-      Самая популярна пыльца среди пчёл: #{stats[:most_popular_pollen]}
-      Лучший день для сбора урожая: #{stats[:best_day]}
-      Худший день для сбора урожая: #{stats[:worst_day]}
-      Самая эффективная пчела: #{stats[:best_bee]}
-      Самая неэффективная пчела: #{stats[:worst_bee]}
-    TEXT
   end
 end
