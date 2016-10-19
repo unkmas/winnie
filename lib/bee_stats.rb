@@ -10,7 +10,7 @@ class BeeStats
 
   # Public: Returns name and amount of harvested sugar from most-sugar-pollen
   #
-  # Returns a String id of pollen
+  # Returns a String name of pollen
   def best_sugar_pollen
     best_pollen = best(:pollen, :sugar_total)
 
@@ -19,7 +19,7 @@ class BeeStats
 
   # Public: Returns name and amount of mg harvested from most popular pollen
   #
-  # Returns a String id of pollen
+  # Returns a String name of pollen
   def most_popular_pollen
     best_pollen = best(:pollen, :mg_total)
 
