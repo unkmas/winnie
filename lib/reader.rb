@@ -32,7 +32,7 @@ class Reader
   # Returns nothing
   def read_harvest
     CSV.foreach(harvest_path, headers: true, header_converters: :symbol) do |row|
-      sugar_harvested = bee_stats.pollens.find(row[:pollen_id]).sugar_per_mg * row[:miligrams_harvested].to_i
+      sugar_harvested = bee_stats.pollens.find(row[:pollen_id]).sugar_per_mg * row[:miligrams_harvested].to_f
 
       bee_stats.workdays.add(row[:bee_id], row[:day], row[:pollen_id], row[:miligrams_harvested], sugar_harvested)
     end

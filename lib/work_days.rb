@@ -15,8 +15,8 @@ class Workdays
   # bee_id          - a String id of bee
   # day             - a String day
   # pollen_id       - a String id of pollen harvested
-  # mg_harvested    - an Object, that responds to to_i, count of mg harvested
-  # sugar_harvested - an Object, that responds to to_i, amount of sugar harvested
+  # mg_harvested    - an Object, that responds to to_f, count of mg harvested
+  # sugar_harvested - an Object, that responds to to_f, amount of sugar harvested
   #
   # Examples
   #    add('10', '2014-10-11', '1', 12)
@@ -29,7 +29,7 @@ class Workdays
       raise ArgumentError.new('Sugar per mg must be a number')
     end
 
-    @data << Workday.new(bee_id, day, pollen_id, mg_harvested.to_i, sugar_harvested.to_i)
+    @data << Workday.new(bee_id, day, pollen_id, mg_harvested.to_f, sugar_harvested.to_f)
   end
 
   # Public: gets totals from workdays by pollen
