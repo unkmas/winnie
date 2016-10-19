@@ -99,6 +99,8 @@ module Formatter
           move_down(10)
           image "bee_chart.png"
         end
+
+        puts 'Отчёт сгенерирован в файл output.pdf'
       end
 
     end
