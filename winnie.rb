@@ -25,6 +25,8 @@ class Winnie
     case format
     when :plain
       Formatter::PlainText.format(values)
+    when :pdf
+      Formatter::PDF.format(values)
     else
       raise ArgumentError.new('There is no such format!')
     end
@@ -43,7 +45,9 @@ class Winnie
       best_day: bee_stats.best(:days, :sugar_total).key,
       worst_day: bee_stats.worst(:days, :sugar_total).key,
       best_bee: bee_stats.get_stats(:bee).max(&bee_proc).key,
-      worst_bee: bee_stats.get_stats(:bee).min(&bee_proc).key
+      worst_bee: bee_stats.get_stats(:bee).min(&bee_proc).key,
+      all_by_days: bee_stats.get_stats(:days),
+      all_by_bees: bee_stats.get_stats(:bee)
     }
   end
 end

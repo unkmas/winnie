@@ -3,12 +3,15 @@ GEM
   specs:
     diff-lcs (1.2.5)
     docile (1.1.5)
-    gchart (1.0.0)
-      hoe (>= 2.3.2)
-    hoe (3.15.2)
-      rake (>= 0.8, < 12.0)
+    gruff (0.7.0)
+      rmagick (~> 2.13, >= 2.13.4)
     multi_json (1.11.2)
+    pdf-core (0.6.1)
+    prawn (2.1.0)
+      pdf-core (~> 0.6.1)
+      ttfunk (~> 1.4.0)
     rake (11.3.0)
+    rmagick (2.16.0)
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -26,12 +29,14 @@ GEM
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
+    ttfunk (1.4.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  gchart
+  gruff
+  prawn
   rake
   rspec
   simplecov

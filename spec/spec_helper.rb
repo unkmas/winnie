@@ -1,5 +1,7 @@
 require 'simplecov'
-SimpleCov.start 'test_frameworks'
+SimpleCov.start 'test_frameworks' do
+  add_filter '/formatter/'
+end
 
 require_relative '../winnie'
 

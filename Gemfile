@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'gchart'
+gem 'gruff'
+gem 'prawn'
 gem 'rake'
 
 group :test do

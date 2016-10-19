@@ -23,11 +23,13 @@ describe Winnie do
         double('total', sugar_total: 10, records_total: 1, key: '5'),
         double('total', sugar_total: 10, records_total: 10, key: '6')
       ])
+
+      allow(bee_stats).to receive(:get_stats).with(:days)
     end
 
     before { allow(reader).to receive(:read).and_return(bee_stats) }
 
-    subject { winnie.values }
+    subject { winnie.send(:values) }
 
     it { expect(subject[:best_sugar_pollen]).to eq '1' }
     it { expect(subject[:most_popular_pollen]).to eq '2' }
@@ -35,5 +37,24 @@ describe Winnie do
     it { expect(subject[:worst_day]).to eq '4' }
     it { expect(subject[:best_bee]).to eq '5' }
     it { expect(subject[:worst_bee]).to eq '6' }
+  end
+
+  context '#output' do
+    before { allow(reader).to receive(:read).and_return(double('bee_stats')) }
+    before { allow(winnie).to receive(:values).and_return(double('values')) }
+
+    it 'should render plaintext if format is plain' do
+      expect(Formatter::PlainText).to receive(:format)
+      winnie.output(:plain)
+    end
+
+    it 'should render pdf if format is pdf' do
+      expect(Formatter::PDF).to receive(:format)
+      winnie.output(:pdf)
+    end
+
+    it 'should raise error if unsupported format given' do
+      expect { winnie.output(:jpg) }.to raise_error(ArgumentError)
+    end
   end
 end
